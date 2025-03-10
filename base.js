@@ -1,7 +1,7 @@
 const {OFF, WARNING, ERROR} = require('./constants');
 
 module.exports = {
-    extends: ['eslint:recommended'],
+    extends: ['eslint:recommended', 'plugin:jsdoc/recommended'],
     parser: '@babel/eslint-parser',
     parserOptions: {
         ecmaVersion: 2019,
@@ -11,11 +11,15 @@ module.exports = {
         es6: true,
         'shared-node-browser': true,
     },
-    plugins: ['import'],
+    plugins: ['import', 'jsdoc'],
     rules: {
         // Possible Errors
         'no-empty': OFF, // eslint:recommended
-        'valid-jsdoc': [WARNING, {requireParamDescription: false, requireReturnDescription: false}],
+
+        //jsdoc
+        'jsdoc/require-param-description': WARNING,
+        'jsdoc/require-returns-description': WARNING,
+        //'valid-jsdoc': [WARNING, {requireParamDescription: false, requireReturnDescription: false}],
 
         // Best Practices
         'array-callback-return': ERROR,
@@ -120,6 +124,13 @@ module.exports = {
                 'no-undef': OFF,
                 'no-dupe-class-members': OFF,
 
+                // jsdoc
+                'jsdoc/require-returns-type': WARNING,
+                'jsdoc/require-param-type': WARNING,
+                'jsdoc/require-param-description': WARNING,
+                'jsdoc/require-returns-description': WARNING,
+
+                /*
                 'valid-jsdoc': [
                     WARNING,
                     {
@@ -131,6 +142,7 @@ module.exports = {
                         requireReturnDescription: false,
                     },
                 ],
+                */
 
                 // TypeScript-specific extension rules
                 'no-array-constructor': OFF,
