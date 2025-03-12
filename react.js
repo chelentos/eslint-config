@@ -1,8 +1,14 @@
+const react = require('eslint-plugin-react');
+const reactHooks = require('eslint-plugin-react-hooks');
+
 const {OFF, WARNING} = require('./constants');
 
 module.exports = {
     extends: ['plugin:react/recommended', 'plugin:react-hooks/recommended'],
-    plugins: ['react', 'react-hooks'],
+    plugins: {
+        react,
+        'react-hooks': reactHooks,
+    },
     parserOptions: {
         ecmaFeatures: {
             jsx: true,

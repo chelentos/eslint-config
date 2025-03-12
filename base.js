@@ -2,22 +2,17 @@ const babelParser = require('@babel/eslint-parser');
 const eslint = require('@eslint/js');
 const typescriptPlugin = require('@typescript-eslint/eslint-plugin');
 const typescriptParser = require('@typescript-eslint/parser');
-const importPlugin = require('eslint-plugin-import-x');
+const importPlugin = require('eslint-plugin-import');
 const globals = require('globals');
 
-// Импортируем только правила jsdoc, без полного плагина
 //const jsdocRules = require('eslint-plugin-jsdoc').rules;
 
 const {OFF, WARNING, ERROR} = require('./constants');
 
 /** @type {import('eslint').Linter.Config[]} */
 const baseConfig = [
-    // Базовые рекомендуемые правила ESLint
     eslint.configs.recommended,
-
-    // Глобальная конфигурация для JS и JSX файлов
     {
-        files: ['**/*.js', '**/*.jsx'],
         languageOptions: {
             parser: babelParser,
             parserOptions: {
@@ -140,28 +135,14 @@ const baseConfig = [
             'import/no-extraneous-dependencies': [ERROR, {includeTypes: true}],
         },
     },
-
-    // Конфигурация для TypeScript файлов
     {
         files: ['**/*.ts', '**/*.tsx'],
         languageOptions: {
             parser: typescriptParser,
-            parserOptions: {
-                project: './tsconfig.json', // Убедитесь, что этот путь правильный
-            },
         },
         plugins: {
             '@typescript-eslint': typescriptPlugin,
             import: importPlugin,
-        },
-        settings: {
-            'import/parsers': {
-                '@typescript-eslint/parser': ['.ts', '.tsx'],
-            },
-            'import/resolver': {
-                typescript: true,
-                node: true,
-            },
         },
         rules: {
             // TypeScript compiler handles these on its own
@@ -257,6 +238,17 @@ const baseConfig = [
                     },
                 },
             ],
+        },
+    },
+    {
+        settings: {
+            'import/parsers': {
+                '@typescript-eslint/parser': ['.ts', '.tsx'],
+            },
+            'import/resolver': {
+                typescript: true,
+                node: true,
+            },
         },
     },
 ];
