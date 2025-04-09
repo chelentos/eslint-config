@@ -7,6 +7,7 @@
     "config"
   ],
   "license": "MIT",
+  "type": "module",
   "main": "index.js",
   "files": [
     "a11y.js",

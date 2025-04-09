@@ -1,12 +1,12 @@
-const babelParser = require('@babel/eslint-parser');
-const eslint = require('@eslint/js');
-const typescriptPlugin = require('@typescript-eslint/eslint-plugin');
-const typescriptParser = require('@typescript-eslint/parser');
-const importPlugin = require('eslint-plugin-import');
-const jsdoc = require('eslint-plugin-jsdoc');
-const globals = require('globals');
+import babelParser from '@babel/eslint-parser';
+import eslint from '@eslint/js';
+import typescriptPlugin from '@typescript-eslint/eslint-plugin';
+import typescriptParser from '@typescript-eslint/parser';
+import importPlugin from 'eslint-plugin-import';
+import jsdocPlugin from 'eslint-plugin-jsdoc';
+import globals from 'globals';
 
-const {OFF, WARNING, ERROR} = require('./constants');
+import {ERROR, OFF, WARNING} from './constants.js';
 
 const baseConfig = [
     eslint.configs.recommended,
@@ -24,7 +24,7 @@ const baseConfig = [
         },
         plugins: {
             import: importPlugin,
-            jsdoc,
+            jsdoc: jsdocPlugin,
         },
         settings: {
             'import/resolver': {
@@ -141,7 +141,7 @@ const baseConfig = [
         plugins: {
             '@typescript-eslint': typescriptPlugin,
             import: importPlugin,
-            jsdoc,
+            jsdoc: jsdocPlugin,
         },
         rules: {
             // TypeScript compiler handles these on its own
@@ -252,4 +252,4 @@ const baseConfig = [
     },
 ];
 
-module.exports = baseConfig;
+export default baseConfig;
